@@ -10,7 +10,7 @@ export default function EmptyState({
   primaryActionLabel
 }) {
   return (
-    <div className="flex flex-row items-start justify-start w-full h-full">
+    <div className="flex flex-row items-start justify-start w-full h-auto">
       <div className="w-3/5 m-auto">
         <div className="max-w-sm m-auto mb-8">
           <img src={image} />

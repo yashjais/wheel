@@ -4,10 +4,10 @@ import { Search, Settings, Plus, BurgerMenu } from "@bigbinary/neeto-icons";
 import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
 import { MenuBar, Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { PageLoader } from "neetoui";
-import { SubHeader } from "neetoui/layouts";
 
-import notesApi from "apis/notes";
+import ListNote from "./ListNote";
+import { notes } from "../../../data/notes";
+
 import EmptyState from "components/Common/EmptyState";
 
 import DeleteAlert from "./DeleteAlert";
@@ -16,32 +16,8 @@ import NoteTable from "./NoteTable";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
-  // const [showNewNotePane, setShowNewNotePane] = useState(false);
-  // const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [selectedNoteIds, setSelectedNoteIds] = useState([]);
-  // const [notes, setNotes] = useState([]);
+  const [showNewNotePane, setShowNewNotePane] = useState(false);
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(true);
-
-  // useEffect(() => {
-  //   fetchNotes();
-  // }, []);
-
-  // const fetchNotes = async () => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await notesApi.fetch();
-  //     setNotes(response.data.notes);
-  //   } catch (error) {
-  //     logger.error(error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-  // if (loading) {
-  //   return <PageLoader />;
-  // }
 
   const renderNotesMenubar = () => (
     <MenuBar showMenu={true} title={<Typography style="h2">Notes</Typography>}>
@@ -110,72 +86,57 @@ const Notes = () => {
   );
 
   const renderNotesSection = () => (
-    <div>
+    <div className="w-full px-5">
       <Header
         actionBlock={[
           <Input
+            key="input_header"
             prefix={<Search size={16} />}
+            contentSize="35"
             placeholder="Search Name, Email, Phone Number, Etc."
           />,
           <Button
-            // onClick={() => setShowNewNotePane(true)}
+            key="button_header"
+            className="ml-3"
+            onClick={() => setShowNewNotePane(true)}
             style="primary"
             label="Add Note"
             iconPosition="right"
-            icon={() => <Plus size={18} />}
+            size="large"
+            icon={() => <Plus size={18} className="ml-3" />}
           />
         ]}
         menuBarToggle={() => <BurgerMenu />}
         title="All Notes"
       />
-    </div>
-  );
-
-  return (
-    <div className="flex">
-      {renderNotesMenubar()}
-      {renderNotesSection()}
-      {/*
-      {notes.length ? (
-        <>
-          <SubHeader
-            searchProps={{
-              value: searchTerm,
-              onChange: e => setSearchTerm(e.target.value),
-              clear: () => setSearchTerm("")
-            }}
-            deleteButtonProps={{
-              onClick: () => setShowDeleteAlert(true),
-              disabled: !selectedNoteIds.length
-            }}
+      {notes.length !== 0 ? (
+        notes.map((note, index) => (
+          <ListNote
+            key={index}
+            // notesKey={index}
+            title={note.title}
+            notesStatus={note.status}
+            description={note.description}
+            created_at={note.created_at}
+            tag={note.tag}
           />
-          <NoteTable
-            selectedNoteIds={selectedNoteIds}
-            setSelectedNoteIds={setSelectedNoteIds}
-            notes={notes}
-          />
-        </>
+        ))
       ) : (
         <EmptyState
           image={EmptyNotesListImage}
           title="Looks like you don't have any notes!"
           subtitle="Add your notes to send customized emails to them."
           primaryAction={() => setShowNewNotePane(true)}
-          primaryActionLabel="Add New Note"
+          primaryActionLabel="Add Note"
         />
       )}
-      <NewNotePane
-        showPane={showNewNotePane}
-        setShowPane={setShowNewNotePane}
-        fetchNotes={fetchNotes}
-      />
-      {showDeleteAlert && (
-        <DeleteAlert
-          selectedNoteIds={selectedNoteIds}
-          onClose={() => setShowDeleteAlert(false)}
-          refetch={fetchNotes}
-        />
-      )} */}
+    </div>
+  );
+
+  return (
+    <div className="flex w-full">
+      {renderNotesMenubar()}
+      {renderNotesSection()}
     </div>
   );
 };
