@@ -1,51 +1,60 @@
 import React, { useState } from "react";
 
-import { Modal } from "neetoui";
+import { Modal, Typography, Button } from "@bigbinary/neetoui/v2";
 
-import notesApi from "apis/notes";
-
-export default function DeleteAlert({ refetch, onClose, selectedNoteIds }) {
+const DeleteAlert = ({
+  showDeleteAlert,
+  onClose,
+  selectedNoteId,
+  confirmDeleteNote
+}) => {
   const [deleting, setDeleting] = useState(false);
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      await notesApi.destroy({ ids: selectedNoteIds });
-      onClose();
-      refetch();
+      // await notesApi.destroy({ ids: selectedNoteIds });
+      // to simulate the wait time if an api is called -- comment out line 22 and 28
+      // setTimeout(() => {
+      //   confirmDeleteNote(selectedNoteId);
+      //   setDeleting(false);
+      // }, 2000);
+      confirmDeleteNote(selectedNoteId);
+      // onClose();
     } catch (error) {
-      logger.error(error);
+      // logger.error(error);
+      console.log(error);
     } finally {
       setDeleting(false);
     }
   };
   return (
     <Modal
-      isOpen
-      size="small"
-      autoHeight
-      showFooter
-      submitButtonProps={{
-        style: "danger",
-        label: "Continue anyway",
-        loading: deleting,
-        onClick: handleDelete
-      }}
+      size="lg"
+      isOpen={showDeleteAlert}
       onClose={onClose}
+      loading={deleting}
+      closeButton={false}
     >
-      <div className="flex">
-        <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 bg-red-100 rounded-full">
-          <i className="text-red-500 ri-alarm-warning-fill ri-lg"></i>
-        </div>
-
-        <div className="ml-4">
-          <h3 className="mb-2 text-lg font-medium text-gray-700">
-            Delete {selectedNoteIds.length} notes?
-          </h3>
-          <div className="text-sm leading-5 text-gray-500">
-            Are you sure you want to continue? This cannot be undone.
-          </div>
-        </div>
-      </div>
+      <Modal.Header>
+        <Typography style="h2">Delete Note</Typography>
+      </Modal.Header>
+      <Modal.Body>
+        <Typography style="body2" lineHeight="normal">
+          Are you sure you want to delete the Note? This action cannot be
+          undone.
+        </Typography>
+      </Modal.Body>
+      <Modal.Footer className="space-x-2">
+        <Button
+          style="primary"
+          label="Continue"
+          onClick={handleDelete}
+          size="large"
+        />
+        <Button style="text" label="Cancel" onClick={onClose} size="large" />
+      </Modal.Footer>
     </Modal>
   );
-}
+};
+
+export default DeleteAlert;

@@ -6,7 +6,7 @@ import { MenuBar, Header } from "@bigbinary/neetoui/v2/layouts";
 import EmptyNotesListImage from "images/EmptyNotesList";
 
 import ListNote from "./ListNote";
-import { notes } from "../../../data/notes";
+import { constantNotes } from "../../../data/notes";
 
 import EmptyState from "components/Common/EmptyState";
 
@@ -16,11 +16,32 @@ import NoteTable from "./NoteTable";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
+  const [notes, setNotes] = useState(constantNotes);
+  const [selectedNoteId, setSelectedNoteId] = useState(null);
+  const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showNewNotePane, setShowNewNotePane] = useState(false);
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(true);
 
+  const handleDeleteNote = id => {
+    setSelectedNoteId(id);
+    setShowDeleteAlert(true);
+  };
+
+  const confirmDeleteNote = id => {
+    const newNotes = notes.filter(note => note.id !== id);
+    setNotes(newNotes);
+    setSelectedNoteId(null);
+    setShowDeleteAlert(false);
+  };
+
+  const onClose = () => {
+    setShowDeleteAlert(false);
+    setSelectedNoteId(null);
+  };
+
   const renderNotesMenubar = () => (
-    <MenuBar showMenu={true} title={<Typography style="h2">Notes</Typography>}>
+    // <MenuBar showMenu={true} title={<Typography style="h2">Notes</Typography>}>
+    <MenuBar showMenu={true} title={"Notes"}>
       <MenuBar.Block label="All" count={200} active />
       <MenuBar.Block label="Users" count={80} />
       <MenuBar.Block label="Leads" count={60} />
@@ -113,12 +134,13 @@ const Notes = () => {
         notes.map((note, index) => (
           <ListNote
             key={index}
-            // notesKey={index}
+            id={note.id}
             title={note.title}
             notesStatus={note.status}
             description={note.description}
             created_at={note.created_at}
             tag={note.tag}
+            handleDeleteNote={handleDeleteNote}
           />
         ))
       ) : (
@@ -137,6 +159,14 @@ const Notes = () => {
     <div className="flex w-full">
       {renderNotesMenubar()}
       {renderNotesSection()}
+      {showDeleteAlert && (
+        <DeleteAlert
+          showDeleteAlert={showDeleteAlert}
+          onClose={onClose}
+          selectedNoteId={selectedNoteId}
+          confirmDeleteNote={confirmDeleteNote}
+        />
+      )}
     </div>
   );
 };
