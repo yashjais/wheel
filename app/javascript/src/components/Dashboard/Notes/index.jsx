@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
