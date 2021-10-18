@@ -1,18 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import { Search, Settings, Plus, BurgerMenu } from "@bigbinary/neeto-icons";
-import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
-import { MenuBar, Header } from "@bigbinary/neetoui/v2/layouts";
-import EmptyNotesListImage from "images/EmptyNotesList";
+import { Typography, Input, Button } from "neetoui/v2";
+import { MenuBar, Header } from "neetoui/v2/layouts";
+import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 
 import ListNote from "./ListNote";
-import { constantNotes } from "../../../data/notes";
+import DeleteAlert from "./DeleteAlert";
+import NewNotePane from "./NewNotePane";
 
 import EmptyState from "components/Common/EmptyState";
 
-import DeleteAlert from "./DeleteAlert";
-import NewNotePane from "./NewNotePane";
-import NoteTable from "./NoteTable";
+import EmptyNotesListImage from "images/EmptyNotesList";
+import { constantNotes } from "data/notes";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
@@ -37,6 +36,15 @@ const Notes = () => {
   const onClose = () => {
     setShowDeleteAlert(false);
     setSelectedNoteId(null);
+    setShowNewNotePane(false);
+  };
+
+  const handleAddNewNote = note => {
+    note.id = notes.length + 1;
+    note.status = "Created";
+    note.created_at = "3 hours ago";
+    note.tag = "New Tag";
+    setNotes(notes => [...notes, note]);
   };
 
   const renderNotesMenubar = () => (
@@ -165,6 +173,13 @@ const Notes = () => {
           onClose={onClose}
           selectedNoteId={selectedNoteId}
           confirmDeleteNote={confirmDeleteNote}
+        />
+      )}
+      {showNewNotePane && (
+        <NewNotePane
+          showPane={showNewNotePane}
+          handleAddNewNote={handleAddNewNote}
+          onClose={onClose}
         />
       )}
     </div>

@@ -1,58 +1,39 @@
 import React from "react";
 
-import { Formik, Form } from "formik";
-import { Button } from "neetoui";
-import { Input, Textarea } from "neetoui/formik";
-import * as yup from "yup";
+import { Input, Select } from "neetoui/v2/formik";
+import { CONTACTS, TAGS } from "./constants";
 
-import notesApi from "apis/notes";
+const NewNoteForm = () => (
+  <div className="w-full space-y-5">
+    <Input
+      label="Title"
+      name="title"
+      placeholder="Enter note title"
+      required={true}
+    />
+    <Input
+      label="Description"
+      name="description"
+      placeholder="Enter note description"
+      size="large"
+      required={true}
+    />
+    <Select
+      label="Assigned Contact"
+      name="contact"
+      placeholder="Select Role"
+      required={true}
+      options={CONTACTS}
+    />
+    <Select
+      isMulti
+      label="Tags"
+      name="tags"
+      placeholder="Select Role"
+      required={true}
+      options={TAGS}
+    />
+  </div>
+);
 
-export default function NewNoteForm({ onClose, refetch }) {
-  const handleSubmit = async values => {
-    try {
-      await notesApi.create(values);
-      refetch();
-      onClose();
-    } catch (err) {
-      logger.error(err);
-    }
-  };
-  return (
-    <Formik
-      initialValues={{
-        title: "",
-        description: ""
-      }}
-      onSubmit={handleSubmit}
-      validationSchema={yup.object({
-        title: yup.string().required("Title is required"),
-        description: yup.string().required("Description is required")
-      })}
-    >
-      {({ isSubmitting }) => (
-        <Form>
-          <Input label="Title" name="title" className="mb-6" />
-          <Textarea label="Description" name="description" rows={8} />
-          <div className="nui-pane__footer nui-pane__footer--absolute">
-            <Button
-              onClick={onClose}
-              label="Cancel"
-              size="large"
-              style="secondary"
-            />
-
-            <Button
-              type="submit"
-              label="Submit"
-              size="large"
-              style="primary"
-              className="ml-2"
-              disabled={isSubmitting}
-              loading={isSubmitting}
-            />
-          </div>
-        </Form>
-      )}
-    </Formik>
-  );
-}
+export default NewNoteForm;
