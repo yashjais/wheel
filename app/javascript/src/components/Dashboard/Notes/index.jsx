@@ -7,12 +7,11 @@ import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import ListNote from "./ListNote";
 import DeleteAlert from "./DeleteAlert";
 import NewNotePane from "./NewNotePane";
-import NoteTable from "./NoteTable";
 
 import EmptyState from "components/Common/EmptyState";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { constantNotes } from "../../../data/notes";
+import { constantNotes } from "data/notes";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
@@ -37,10 +36,15 @@ const Notes = () => {
   const onClose = () => {
     setShowDeleteAlert(false);
     setSelectedNoteId(null);
+    setShowNewNotePane(false);
   };
 
   const handleAddNewNote = note => {
-    console.log("in the handle new note", note);
+    note.id = notes.length + 1;
+    note.status = "Created";
+    note.created_at = "3 hours ago";
+    note.tag = "New Tag";
+    setNotes(notes => [...notes, note]);
   };
 
   const renderNotesMenubar = () => (
@@ -174,8 +178,8 @@ const Notes = () => {
       {showNewNotePane && (
         <NewNotePane
           showPane={showNewNotePane}
-          setShowPane={setShowNewNotePane}
-          handleSubmit={handleAddNewNote}
+          handleAddNewNote={handleAddNewNote}
+          onClose={onClose}
         />
       )}
     </div>

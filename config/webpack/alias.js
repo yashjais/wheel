@@ -9,7 +9,8 @@ module.exports = {
       reducers: "src/reducers",
       neetoui: "@bigbinary/neetoui",
       neetoicons: "@bigbinary/neeto-icons",
-      helpers: "src/helpers"
+      helpers: "src/helpers",
+      data: "src/data"
     }
   }
 };
