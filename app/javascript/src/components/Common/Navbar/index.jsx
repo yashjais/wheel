@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Dashboard, UserCircle, Settings } from "@bigbinary/neeto-icons";
-import { Sidebar } from "@bigbinary/neetoui/v2/layouts";
+import { Dashboard, UserCircle, Settings } from "neetoicons";
+import { Sidebar } from "neetoui/v2/layouts";
 import { withRouter } from "react-router-dom";
 
 const NavBar = () => (

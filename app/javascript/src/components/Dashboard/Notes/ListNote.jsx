@@ -1,6 +1,6 @@
 import React from "react";
-import { MenuVertical, Clock } from "@bigbinary/neeto-icons";
-import { Avatar, Dropdown } from "@bigbinary/neetoui/v2";
+import { MenuVertical, Clock } from "neetoicons";
+import { Avatar, Dropdown } from "neetoui/v2";
 
 const ListNote = ({
   title,

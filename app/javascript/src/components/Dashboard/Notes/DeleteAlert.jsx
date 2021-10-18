@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Typography, Button } from "@bigbinary/neetoui/v2";
+import { Modal, Typography, Button } from "neetoui/v2";
 
 const DeleteAlert = ({
   showDeleteAlert,

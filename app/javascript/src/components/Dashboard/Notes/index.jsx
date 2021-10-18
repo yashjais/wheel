@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-import { Search, Settings, Plus, BurgerMenu } from "@bigbinary/neeto-icons";
-import { Typography, Input, Button } from "@bigbinary/neetoui/v2";
-import { MenuBar, Header } from "@bigbinary/neetoui/v2/layouts";
-import EmptyNotesListImage from "images/EmptyNotesList";
+import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
+import { Typography, Input, Button } from "neetoui/v2";
+import { MenuBar, Header } from "neetoui/v2/layouts";
 
 import ListNote from "./ListNote";
-import { constantNotes } from "../../../data/notes";
-
-import EmptyState from "components/Common/EmptyState";
-
 import DeleteAlert from "./DeleteAlert";
 import NewNotePane from "./NewNotePane";
 import NoteTable from "./NoteTable";
+
+import EmptyState from "components/Common/EmptyState";
+
+import EmptyNotesListImage from "images/EmptyNotesList";
+import { constantNotes } from "../../../data/notes";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
@@ -167,6 +167,7 @@ const Notes = () => {
           confirmDeleteNote={confirmDeleteNote}
         />
       )}
+      {showNewNotePane && <NewNotePane />}
     </div>
   );
 };
