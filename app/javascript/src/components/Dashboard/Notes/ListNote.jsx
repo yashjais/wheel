@@ -2,54 +2,64 @@ import React from "react";
 import { MenuVertical, Clock } from "@bigbinary/neeto-icons";
 import { Avatar, Dropdown } from "@bigbinary/neetoui/v2";
 
-const ListNote = ({ title, notesStatus, description, created_at, tag }) => (
-  <div>
-    <div className="" style={styles.boxStyle}>
-      <div style={styles.boxInner}>
-        <div>
-          <h4>{title}</h4>
-        </div>
-        <div>
-          <Dropdown
-            label=""
-            buttonStyle="text"
-            position="bottom-end"
-            icon={() => <MenuVertical size={18} />}
-          >
-            <li>Edit</li>
-            <li>Delete</li>
-          </Dropdown>
-        </div>
-      </div>
-      <p style={styles.descriptionStyles}>{description}</p>
-      <hr style={styles.lineStyle} />
-      <div className="mainBottom" style={styles.bottomSec}>
-        <div className="left" style={styles.leftSec}>
-          <button className="button" style={styles.button}>
-            {tag}
-          </button>
-        </div>
-        <div className="right" style={styles.rightSec}>
-          <div className="icon" style={styles.icon}>
-            <Clock size={12} />
+const ListNote = ({
+  title,
+  notesStatus,
+  id,
+  description,
+  created_at,
+  tag,
+  handleDeleteNote
+}) => {
+  return (
+    <div>
+      <div className="" style={styles.boxStyle}>
+        <div style={styles.boxInner}>
+          <div>
+            <h4>{title}</h4>
           </div>
-          <div
-            className="time"
-            style={styles.time}
-          >{`${notesStatus} ${created_at}`}</div>
-          <div className="avatar" style={styles.avatar}>
-            <Avatar
-              user={{
-                name: "neeto UI"
-              }}
-              size="small"
-            />
+          <div>
+            <Dropdown
+              label=""
+              buttonStyle="text"
+              position="bottom-end"
+              icon={() => <MenuVertical size={18} />}
+            >
+              <li>Edit</li>
+              <li onClick={() => handleDeleteNote(id)}>Delete</li>
+            </Dropdown>
+          </div>
+        </div>
+        <p style={styles.descriptionStyles}>{description}</p>
+        <hr style={styles.lineStyle} />
+        <div className="mainBottom" style={styles.bottomSec}>
+          <div className="left" style={styles.leftSec}>
+            <button className="button" style={styles.button}>
+              {tag}
+            </button>
+          </div>
+          <div className="right" style={styles.rightSec}>
+            <div className="icon" style={styles.icon}>
+              <Clock size={12} />
+            </div>
+            <div
+              className="time"
+              style={styles.time}
+            >{`${notesStatus} ${created_at}`}</div>
+            <div className="avatar" style={styles.avatar}>
+              <Avatar
+                user={{
+                  name: "neeto UI"
+                }}
+                size="small"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const styles = {
   boxStyle: {
