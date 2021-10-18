@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
+import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 
 import ListNote from "./ListNote";
 import DeleteAlert from "./DeleteAlert";
@@ -37,6 +37,10 @@ const Notes = () => {
   const onClose = () => {
     setShowDeleteAlert(false);
     setSelectedNoteId(null);
+  };
+
+  const handleAddNewNote = note => {
+    console.log("in the handle new note", note);
   };
 
   const renderNotesMenubar = () => (
@@ -167,7 +171,13 @@ const Notes = () => {
           confirmDeleteNote={confirmDeleteNote}
         />
       )}
-      {showNewNotePane && <NewNotePane />}
+      {showNewNotePane && (
+        <NewNotePane
+          showPane={showNewNotePane}
+          setShowPane={setShowNewNotePane}
+          handleSubmit={handleAddNewNote}
+        />
+      )}
     </div>
   );
 };
