@@ -5,19 +5,19 @@ import { Modal, Typography, Button, Toastr } from "neetoui/v2";
 const DeleteAlert = ({
   showDeleteAlert,
   onClose,
-  selectedNoteId,
-  confirmDeleteNote
+  selectedContactId,
+  confirmDeleteContact
 }) => {
   const [deleting, setDeleting] = useState(false);
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      confirmDeleteNote(selectedNoteId);
+      confirmDeleteContact(selectedContactId);
     } catch (error) {
       console.log(error);
     } finally {
       setDeleting(false);
-      Toastr.success("Note has been successfully deleted.");
+      Toastr.success("Contact deleted successfully.");
     }
   };
   return (
@@ -29,11 +29,11 @@ const DeleteAlert = ({
       closeButton={false}
     >
       <Modal.Header>
-        <Typography style="h2">Delete Note</Typography>
+        <Typography style="h2">Delete Contact</Typography>
       </Modal.Header>
       <Modal.Body>
         <Typography style="body2" lineHeight="normal">
-          Are you sure you want to delete the Note? This action cannot be
+          Are you sure you want to delete Contact? This changes cannot be
           undone.
         </Typography>
       </Modal.Body>
