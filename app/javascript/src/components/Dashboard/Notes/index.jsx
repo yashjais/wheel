@@ -11,11 +11,11 @@ import NewNotePane from "./NewNotePane";
 import EmptyState from "components/Common/EmptyState";
 
 import EmptyNotesListImage from "images/EmptyNotesList";
-import { constantNotes } from "data/notes";
+import { NOTES } from "./constants";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
-  const [notes, setNotes] = useState(constantNotes);
+  const [notes, setNotes] = useState(NOTES);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
   const [showNewNotePane, setShowNewNotePane] = useState(false);
@@ -139,18 +139,7 @@ const Notes = () => {
         title="All Notes"
       />
       {notes.length !== 0 ? (
-        notes.map((note, index) => (
-          <ListNote
-            key={index}
-            id={note.id}
-            title={note.title}
-            notesStatus={note.status}
-            description={note.description}
-            created_at={note.created_at}
-            tag={note.tag}
-            handleDeleteNote={handleDeleteNote}
-          />
-        ))
+        <ListNote notes={notes} handleDeleteNote={handleDeleteNote} />
       ) : (
         <EmptyState
           image={EmptyNotesListImage}
