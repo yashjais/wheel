@@ -1,29 +1,14 @@
 import React from "react";
 
 import { Sidebar } from "neetoui/v2/layouts";
-import { Dashboard, UserCircle, Settings } from "neetoicons";
 import { withRouter } from "react-router-dom";
+
+import { NAV_LINKS } from "./constants";
 
 const NavBar = () => (
   <Sidebar
-    isCollapsed={true}
-    navLinks={[
-      {
-        label: "Notes",
-        to: "/notes",
-        icon: () => <Dashboard color="#1e1e20" size={24} />
-      },
-      {
-        label: "Contacts",
-        to: "/contacts",
-        icon: () => <UserCircle color="#1e1e20" size={24} />
-      },
-      {
-        label: "Settings",
-        to: "/my/profile",
-        icon: () => <Settings color="#1e1e20" size={24} />
-      }
-    ]}
+    isCollapsed
+    navLinks={NAV_LINKS}
     profileInfo={{
       name: "Kieran Miller",
       email: "kieranmiller@gmail.com",

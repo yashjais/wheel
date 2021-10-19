@@ -12,16 +12,8 @@ const DeleteAlert = ({
   const handleDelete = async () => {
     try {
       setDeleting(true);
-      // await notesApi.destroy({ ids: selectedNoteIds });
-      // to simulate the wait time if an api is called -- comment out line 22 and 28
-      // setTimeout(() => {
-      //   confirmDeleteNote(selectedNoteId);
-      //   setDeleting(false);
-      // }, 2000);
       confirmDeleteNote(selectedNoteId);
-      // onClose();
     } catch (error) {
-      // logger.error(error);
       console.log(error);
     } finally {
       setDeleting(false);

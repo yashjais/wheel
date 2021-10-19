@@ -1,4 +1,4 @@
-export const constantContacts = [
+export const CONTACTS = [
   {
     id: 1,
     name: "Ronald Richards",

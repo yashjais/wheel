@@ -4,13 +4,12 @@ import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
 
-import { constantContacts } from "data/contacts";
-
+import { CONTACTS } from "./constants";
 import ContactsTable from "./ContactsTable";
 
 const Contacts = () => {
   const [state, setState] = useState({
-    contacts: constantContacts,
+    contacts: CONTACTS,
     isSearchCollapsed: true,
     setShowNewContactPane: false
   });

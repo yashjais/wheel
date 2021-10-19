@@ -1,28 +1,24 @@
 import React from "react";
 
 import { Input, Select } from "neetoui/v2/formik";
+
 import { CONTACTS, TAGS } from "./constants";
 
 const NewNoteForm = () => (
   <div className="w-full space-y-5">
-    <Input
-      label="Title"
-      name="title"
-      placeholder="Enter note title"
-      required={true}
-    />
+    <Input label="Title" name="title" placeholder="Enter note title" required />
     <Input
       label="Description"
       name="description"
       placeholder="Enter note description"
       size="large"
-      required={true}
+      required
     />
     <Select
       label="Assigned Contact"
       name="contact"
       placeholder="Select Role"
-      required={true}
+      required
       options={CONTACTS}
     />
     <Select
@@ -30,7 +26,7 @@ const NewNoteForm = () => (
       label="Tags"
       name="tags"
       placeholder="Select Role"
-      required={true}
+      required
       options={TAGS}
     />
   </div>
