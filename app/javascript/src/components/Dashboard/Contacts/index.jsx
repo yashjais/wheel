@@ -5,7 +5,6 @@ import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
 
 import { CONTACTS } from "./constants";
-
 import ContactsTable from "./ContactsTable";
 
 const Contacts = () => {

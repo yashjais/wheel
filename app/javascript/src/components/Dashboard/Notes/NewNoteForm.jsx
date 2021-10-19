@@ -26,7 +26,7 @@ const NewNoteForm = () => (
       label="Tags"
       name="tags"
       placeholder="Select Role"
-      requireds
+      required
       options={TAGS}
     />
   </div>
