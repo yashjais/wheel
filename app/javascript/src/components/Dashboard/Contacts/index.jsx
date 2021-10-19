@@ -4,15 +4,36 @@ import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
 
-import { CONTACTS } from "./constants";
 import ContactsTable from "./ContactsTable";
+import ContactPane from "./ContactPane";
+import { CONTACTS } from "./constants";
 
 const Contacts = () => {
   const [state, setState] = useState({
     contacts: CONTACTS,
     isSearchCollapsed: true,
-    setShowNewContactPane: false
+    showNewContactPane: false
   });
+
+  const handleAddNewContact = contact => {
+    const newContact = {
+      id: state.contacts.length + 1,
+      name: `${contact.firstName.trim()} ${contact.lastName.trim()}`,
+      role: contact.role[0].label,
+      mail: contact.email,
+      created_at: "Feb, 5, 2021",
+      url: "https://randomuser.me/api/portraits/women/90.jpg"
+    };
+    setState(state => ({
+      ...state,
+      contacts: [...state.contacts, newContact],
+      showNewContactPane: false
+    }));
+  };
+
+  const onClose = () => {
+    setState(state => ({ ...state, showNewContactPane: false }));
+  };
 
   const renderContactsMenubar = () => (
     <MenuBar showMenu={true} title={"Contacts"}>
@@ -53,7 +74,6 @@ const Contacts = () => {
           {
             icon: () => <Search size={20} />
           },
-
           {
             icon: () => <Plus size={20} />
           },
@@ -88,7 +108,7 @@ const Contacts = () => {
             key="button_header"
             className="ml-3"
             onClick={() =>
-              setState(state => ({ ...state, setShowNewContactPane: true }))
+              setState(state => ({ ...state, showNewContactPane: true }))
             }
             style="primary"
             label="Add Contact"
@@ -108,6 +128,13 @@ const Contacts = () => {
     <div className="flex w-full">
       {renderContactsMenubar()}
       {renderContactsSection()}
+      {state.showNewContactPane && (
+        <ContactPane
+          showPane={state.showNewContactPane}
+          onClose={onClose}
+          handleAddNewContact={handleAddNewContact}
+        />
+      )}
     </div>
   );
 };

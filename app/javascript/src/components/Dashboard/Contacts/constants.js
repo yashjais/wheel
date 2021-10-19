@@ -1,3 +1,5 @@
+import * as yup from "yup";
+
 export const CONTACTS = [
   {
     id: 1,
@@ -72,3 +74,32 @@ export const CONTACTS = [
     url: "https://randomuser.me/api/portraits/women/90.jpg"
   }
 ];
+
+export const ROLE = [
+  {
+    label: "Owner",
+    value: "owner"
+  },
+  {
+    label: "Admin",
+    value: "admin"
+  },
+  {
+    label: "Super Admin",
+    value: "super-admin"
+  }
+];
+
+export const INITIAL_VALUES = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: []
+};
+
+export const VALIDATION_SCHEMA = yup.object({
+  firstName: yup.string().required("First Name is required"),
+  lastName: yup.string().required("Last Name is required"),
+  email: yup.string().required("Email is required"),
+  role: yup.array().min(1).required("Role is required")
+});

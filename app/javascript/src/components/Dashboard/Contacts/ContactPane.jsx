@@ -4,15 +4,15 @@ import { Button, Pane, Typography, Toastr } from "neetoui/v2";
 import { Check } from "neetoicons";
 import { Formik, Form } from "formik";
 
-import NewNoteForm from "./NewNoteForm";
+import ContactForm from "./ContactForm";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
 
-export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
+const ContactPane = ({ showPane, onClose, handleAddNewContact }) => {
   const handleSubmit = async values => {
     try {
-      handleAddNewNote(values);
+      handleAddNewContact(values);
       onClose();
-      Toastr.success("Note has been successfully saved.");
+      Toastr.success("Contact has been successfully saved.");
     } catch (err) {
       console.log(err);
     }
@@ -21,7 +21,7 @@ export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
     <Pane isOpen={showPane} onClose={onClose}>
       <Pane.Header>
         <Typography style="h2" weight="semibold">
-          Add New Note
+          Add New Contact
         </Typography>
       </Pane.Header>
       <Formik
@@ -31,7 +31,7 @@ export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
       >
         <Form>
           <Pane.Body>
-            <NewNoteForm />
+            <ContactForm />
           </Pane.Body>
           <Pane.Footer className="flex space-x-2">
             <Button label="Save Changes" icon={Check} type="submit" />
@@ -41,4 +41,6 @@ export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
       </Formik>
     </Pane>
   );
-}
+};
+
+export default ContactPane;
