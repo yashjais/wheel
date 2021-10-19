@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { Modal, Typography, Button } from "neetoui/v2";
+import { Modal, Typography, Button, Toastr } from "neetoui/v2";
 
 const DeleteAlert = ({
   showDeleteAlert,
@@ -17,6 +17,7 @@ const DeleteAlert = ({
       console.log(error);
     } finally {
       setDeleting(false);
+      Toastr.success("Note has been successfully deleted.");
     }
   };
   return (

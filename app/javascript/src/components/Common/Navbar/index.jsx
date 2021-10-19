@@ -15,7 +15,7 @@ const NavBar = () => (
       imageUrl: "https://randomuser.me/api/portraits/women/90.jpg",
       dropdownProps: [
         {
-          label: "Edit"
+          label: "My Profile"
         },
         {
           label: "Logout"
