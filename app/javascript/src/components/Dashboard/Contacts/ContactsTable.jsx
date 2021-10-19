@@ -3,7 +3,7 @@ import React from "react";
 import { MenuHorizontal } from "neetoicons";
 import { Checkbox, Dropdown, Pagination, Avatar, Typography } from "neetoui/v2";
 
-const ContactsTable = ({ contacts }) => {
+const ContactsTable = ({ contacts, handleSelectContactId }) => {
   const renderNameAndrole = contact => (
     <div className="flex items-center space-x-2">
       <Avatar
@@ -56,7 +56,9 @@ const ContactsTable = ({ contacts }) => {
                       autoWidth
                     >
                       <li>Edit</li>
-                      <li>Delete</li>
+                      <li onClick={() => handleSelectContactId(contact.id)}>
+                        Delete
+                      </li>
                     </Dropdown>
                   </div>
                 </td>

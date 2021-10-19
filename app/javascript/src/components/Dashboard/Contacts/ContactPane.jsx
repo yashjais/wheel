@@ -12,7 +12,7 @@ const ContactPane = ({ showPane, onClose, handleAddNewContact }) => {
     try {
       handleAddNewContact(values);
       onClose();
-      Toastr.success("Contact has been successfully saved.");
+      Toastr.success("Contact added successfully.");
     } catch (err) {
       console.log(err);
     }

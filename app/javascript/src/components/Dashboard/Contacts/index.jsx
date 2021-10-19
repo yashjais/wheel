@@ -6,13 +6,16 @@ import { MenuBar, Header } from "neetoui/v2/layouts";
 
 import ContactsTable from "./ContactsTable";
 import ContactPane from "./ContactPane";
+import DeleteAlert from "./DeleteAlert";
 import { CONTACTS } from "./constants";
 
 const Contacts = () => {
   const [state, setState] = useState({
     contacts: CONTACTS,
     isSearchCollapsed: true,
-    showNewContactPane: false
+    showNewContactPane: false,
+    selectedContactId: null,
+    showDeleteAlert: false
   });
 
   const handleAddNewContact = contact => {
@@ -33,6 +36,23 @@ const Contacts = () => {
 
   const onClose = () => {
     setState(state => ({ ...state, showNewContactPane: false }));
+  };
+
+  const handleSelectContactId = contactId => {
+    setState(state => ({
+      ...state,
+      selectedContactId: contactId,
+      showDeleteAlert: true
+    }));
+  };
+
+  const confirmDeleteContact = id => {
+    setState(state => ({
+      ...state,
+      contacts: state.contacts.filter(contact => contact.id !== id),
+      showDeleteAlert: false,
+      selectedContactId: null
+    }));
   };
 
   const renderContactsMenubar = () => (
@@ -120,7 +140,10 @@ const Contacts = () => {
         menuBarToggle={() => <BurgerMenu />}
         title="All Contacts"
       />
-      <ContactsTable contacts={state.contacts} />
+      <ContactsTable
+        contacts={state.contacts}
+        handleSelectContactId={handleSelectContactId}
+      />
     </div>
   );
 
@@ -133,6 +156,14 @@ const Contacts = () => {
           showPane={state.showNewContactPane}
           onClose={onClose}
           handleAddNewContact={handleAddNewContact}
+        />
+      )}
+      {state.showDeleteAlert && (
+        <DeleteAlert
+          showDeleteAlert={state.showDeleteAlert}
+          onClose={onClose}
+          selectedContactId={state.selectedContactId}
+          confirmDeleteContact={confirmDeleteContact}
         />
       )}
     </div>
