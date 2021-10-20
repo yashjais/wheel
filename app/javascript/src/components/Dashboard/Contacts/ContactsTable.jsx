@@ -1,7 +1,14 @@
 import React from "react";
 
 import { MenuHorizontal } from "neetoicons";
-import { Checkbox, Dropdown, Pagination, Avatar, Typography } from "neetoui/v2";
+import {
+  Checkbox,
+  Dropdown,
+  Pagination,
+  Avatar,
+  Typography,
+  Tooltip
+} from "neetoui/v2";
 
 const ContactsTable = ({ contacts, handleSelectContactId }) => {
   const renderNameAndrole = contact => (
@@ -46,7 +53,9 @@ const ContactsTable = ({ contacts, handleSelectContactId }) => {
                   <Checkbox name="1" />
                 </td>
                 <td>{renderNameAndrole(contact)}</td>
-                <td>{contact.mail}</td>
+                <Tooltip content={contact.mail} placement="top-start">
+                  <td className="max-w-xs truncate">{contact.mail}</td>
+                </Tooltip>
                 <td>{contact.created_at}</td>
                 <td>
                   <div className="flex flex-row items-center justify-end space-x-3">

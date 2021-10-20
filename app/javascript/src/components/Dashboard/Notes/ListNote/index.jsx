@@ -2,7 +2,7 @@ import React from "react";
 
 import Card from "./Card";
 
-const ListNote = ({ notes, handleDeleteNote }) =>
+const ListNote = ({ notes, handleSelectNote }) =>
   notes.map(note => (
     <Card
       key={note.id}
@@ -12,7 +12,7 @@ const ListNote = ({ notes, handleDeleteNote }) =>
       tag={note.tag}
       notesStatus={note.status}
       created_at={note.created_at}
-      handleDeleteNote={handleDeleteNote}
+      handleSelectNote={handleSelectNote}
     />
   ));
 

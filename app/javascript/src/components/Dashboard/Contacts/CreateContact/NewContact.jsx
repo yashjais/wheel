@@ -12,14 +12,12 @@ const ContactForm = () => (
         name="firstName"
         placeholder="Enter First Name"
         size="small"
-        required
       />
       <Input
         label="Last Name"
         name="lastName"
         placeholder="Enter Last Name"
         size="small"
-        required
       />
     </div>
     <Input
@@ -27,14 +25,12 @@ const ContactForm = () => (
       name="email"
       placeholder="Enter your Email Address"
       size="large"
-      required
     />
     <Select
       isMulti
       label="Role"
       name="role"
       placeholder="Select Role"
-      required
       options={ROLE}
     />
   </div>

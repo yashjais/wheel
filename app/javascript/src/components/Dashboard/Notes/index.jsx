@@ -8,21 +8,23 @@ import { MenuBar, Header } from "neetoui/v2/layouts";
 import EmptyState from "components/Common/EmptyState";
 
 import { NOTES } from "./constants";
-import CreateNote from "./CreateNote";
+import NotePane from "./NotePane";
 import DeleteAlert from "./DeleteAlert";
 import ListNote from "./ListNote";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
   const [notes, setNotes] = useState(NOTES);
+  const [isMenuOpen, setisMenuOpen] = useState(true);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
   const [showDeleteAlert, setShowDeleteAlert] = useState(false);
-  const [showNewNotePane, setShowNewNotePane] = useState(false);
+  const [showNotePane, setShowNotePane] = useState(false);
   const [isSearchCollapsed, setIsSearchCollapsed] = useState(true);
 
-  const handleDeleteNote = id => {
+  const handleSelectNote = (id, fuctn) => {
     setSelectedNoteId(id);
-    setShowDeleteAlert(true);
+    if (fuctn === "delete") setShowDeleteAlert(true);
+    else if (fuctn === "edit") setShowNotePane(true);
   };
 
   const confirmDeleteNote = id => {
@@ -35,7 +37,7 @@ const Notes = () => {
   const onClose = () => {
     setShowDeleteAlert(false);
     setSelectedNoteId(null);
-    setShowNewNotePane(false);
+    setShowNotePane(false);
   };
 
   const handleAddNewNote = note => {
@@ -47,7 +49,7 @@ const Notes = () => {
   };
 
   const renderNotesMenubar = () => (
-    <MenuBar showMenu title={"Notes"}>
+    <MenuBar showMenu={isMenuOpen} title={"Notes"}>
       <MenuBar.Block label="All" count={200} active />
       <MenuBar.Block label="Users" count={80} />
       <MenuBar.Block label="Leads" count={60} />
@@ -113,7 +115,7 @@ const Notes = () => {
   );
 
   const renderNotesSection = () => (
-    <div className="w-full px-5">
+    <div className="w-full px-6">
       <Header
         actionBlock={[
           <Input
@@ -125,7 +127,7 @@ const Notes = () => {
           <Button
             key="button_header"
             className="ml-3"
-            onClick={() => setShowNewNotePane(true)}
+            onClick={() => setShowNotePane(true)}
             style="primary"
             label="Add Note"
             iconPosition="right"
@@ -133,17 +135,19 @@ const Notes = () => {
             icon={() => <Plus size={18} className="ml-3" />}
           />
         ]}
-        menuBarToggle={() => <BurgerMenu />}
+        menuBarToggle={() => (
+          <BurgerMenu onClick={setisMenuOpen(!isMenuOpen)} />
+        )}
         title="All Notes"
       />
       {notes.length !== 0 ? (
-        <ListNote notes={notes} handleDeleteNote={handleDeleteNote} />
+        <ListNote notes={notes} handleSelectNote={handleSelectNote} />
       ) : (
         <EmptyState
           image={EmptyNotesListImage}
           title="Looks like you don't have any notes!"
           subtitle="Add your notes to send customized emails to them."
-          primaryAction={() => setShowNewNotePane(true)}
+          primaryAction={() => setShowNotePane(true)}
           primaryActionLabel="Add Note"
         />
       )}
@@ -162,9 +166,14 @@ const Notes = () => {
           confirmDeleteNote={confirmDeleteNote}
         />
       )}
-      {showNewNotePane && (
-        <CreateNote
-          showPane={showNewNotePane}
+      {showNotePane && (
+        <NotePane
+          showPane={showNotePane}
+          selectedNote={
+            selectedNoteId
+              ? notes.find(note => note.id === selectedNoteId)
+              : null
+          }
           handleAddNewNote={handleAddNewNote}
           onClose={onClose}
         />
