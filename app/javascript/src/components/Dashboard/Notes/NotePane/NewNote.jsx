@@ -10,20 +10,19 @@ const NewNote = ({ selectedNote }) => (
       label="Title"
       name="title"
       placeholder="Enter note title"
-      // defaultValue={selectedNote && selectedNote.title}
+      value={selectedNote && selectedNote.title}
     />
     <Input
       label="Description"
       name="description"
       placeholder="Enter note description"
       size="large"
-      // defaultValue={selectedNote && selectedNote.description}
+      value={selectedNote && selectedNote.description}
     />
     <Select
       label="Assigned Contact"
       name="contact"
       placeholder="Select Role"
-      // defaultValue={selectedNote && selectedNote.contact}
       options={CONTACTS}
     />
     <Select
@@ -31,7 +30,6 @@ const NewNote = ({ selectedNote }) => (
       label="Tags"
       name="tags"
       placeholder="Select Role"
-      // defaultValue={selectedNote && selectedNote.tags}
       options={TAGS}
     />
   </div>

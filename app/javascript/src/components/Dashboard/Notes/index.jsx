@@ -8,12 +8,11 @@ import { MenuBar, Header } from "neetoui/v2/layouts";
 import EmptyState from "components/Common/EmptyState";
 
 import { NOTES } from "./constants";
-import NotePane from "./NotePane";
 import DeleteAlert from "./DeleteAlert";
 import ListNote from "./ListNote";
+import NotePane from "./NotePane";
 
 const Notes = () => {
-  // const [loading, setLoading] = useState(true);
   const [notes, setNotes] = useState(NOTES);
   const [isMenuOpen, setisMenuOpen] = useState(true);
   const [selectedNoteId, setSelectedNoteId] = useState(null);
