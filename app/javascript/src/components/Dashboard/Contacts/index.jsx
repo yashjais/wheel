@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 
+import EmptyContactsListImage from "images/EmptyList";
 import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
 
+import EmptyState from "components/Common/EmptyState";
+
+import { CONTACTS } from "./constants";
 import ContactsTable from "./ContactsTable";
 import CreateContact from "./CreateContact";
 import DeleteAlert from "./DeleteAlert";
-import { CONTACTS } from "./constants";
 
 const Contacts = () => {
   const [state, setState] = useState({
@@ -140,10 +143,25 @@ const Contacts = () => {
         menuBarToggle={() => <BurgerMenu />}
         title="All Contacts"
       />
-      <ContactsTable
-        contacts={state.contacts}
-        handleSelectContactId={handleSelectContactId}
-      />
+      {state.contacts.length !== 0 ? (
+        <ContactsTable
+          contacts={state.contacts}
+          handleSelectContactId={handleSelectContactId}
+        />
+      ) : (
+        <EmptyState
+          image={EmptyContactsListImage}
+          title="Looks like you don't have any contacts!"
+          subtitle="Add your contacts to send customized emails to them."
+          primaryAction={() =>
+            setState(state => ({
+              ...state,
+              showNewContactPane: true
+            }))
+          }
+          primaryActionLabel="Add Contact"
+        />
+      )}
     </div>
   );
 
