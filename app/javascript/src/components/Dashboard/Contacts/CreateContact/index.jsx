@@ -4,10 +4,10 @@ import { Button, Pane, Typography, Toastr } from "neetoui/v2";
 import { Check } from "neetoicons";
 import { Formik, Form } from "formik";
 
-import ContactForm from "./ContactForm";
-import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
+import ContactForm from "./NewContact";
+import { INITIAL_VALUES, VALIDATION_SCHEMA } from "../constants";
 
-const ContactPane = ({ showPane, onClose, handleAddNewContact }) => {
+const CreateContact = ({ showPane, onClose, handleAddNewContact }) => {
   const handleSubmit = async values => {
     try {
       handleAddNewContact(values);
@@ -43,4 +43,4 @@ const ContactPane = ({ showPane, onClose, handleAddNewContact }) => {
   );
 };
 
-export default ContactPane;
+export default CreateContact;

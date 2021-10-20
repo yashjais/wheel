@@ -2,9 +2,9 @@ import React from "react";
 
 import { Input, Select } from "neetoui/v2/formik";
 
-import { CONTACTS, TAGS } from "./constants";
+import { CONTACTS, TAGS } from "../constants";
 
-const NewNoteForm = () => (
+const NewNote = () => (
   <div className="w-full space-y-5">
     <Input label="Title" name="title" placeholder="Enter note title" required />
     <Input
@@ -32,4 +32,4 @@ const NewNoteForm = () => (
   </div>
 );
 
-export default NewNoteForm;
+export default NewNote;

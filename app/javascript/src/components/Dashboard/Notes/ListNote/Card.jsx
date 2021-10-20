@@ -3,7 +3,7 @@ import React from "react";
 import { MenuVertical, Clock } from "neetoicons";
 import { Avatar, Dropdown, Typography, Tag, Tooltip } from "neetoui/v2";
 
-const CardNote = ({
+const Card = ({
   id,
   title,
   description,
@@ -62,4 +62,4 @@ const CardNote = ({
   </div>
 );
 
-export default CardNote;
+export default Card;

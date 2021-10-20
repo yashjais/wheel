@@ -2,9 +2,9 @@ import React from "react";
 
 import { Input, Select } from "neetoui/v2/formik";
 
-import { ROLE } from "./constants";
+import { ROLE } from "../constants";
 
-const NewNoteForm = () => (
+const ContactForm = () => (
   <div className="w-full space-y-5">
     <div className="flex space-x-2">
       <Input
@@ -40,4 +40,4 @@ const NewNoteForm = () => (
   </div>
 );
 
-export default NewNoteForm;
+export default ContactForm;
