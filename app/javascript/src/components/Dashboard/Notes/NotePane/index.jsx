@@ -7,7 +7,7 @@ import { Formik, Form } from "formik";
 import NewNote from "./NewNote";
 import { INITIAL_VALUES, VALIDATION_SCHEMA } from "../constants";
 
-const CreateNote = ({ showPane, onClose, handleAddNewNote }) => {
+const CreateNote = ({ showPane, onClose, selectedNote, handleAddNewNote }) => {
   const handleSubmit = async values => {
     try {
       handleAddNewNote(values);
@@ -31,7 +31,7 @@ const CreateNote = ({ showPane, onClose, handleAddNewNote }) => {
       >
         <Form>
           <Pane.Body>
-            <NewNote />
+            <NewNote selectedNote={selectedNote} />
           </Pane.Body>
           <Pane.Footer className="flex space-x-2">
             <Button label="Save Changes" icon={Check} type="submit" />

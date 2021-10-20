@@ -21,7 +21,7 @@ export const CONTACTS = [
     id: 3,
     name: "Ronald Richards",
     role: "Owner",
-    mail: "ronald@gmail.com",
+    mail: "ronaldronaldronaldronaldronaldronaldronaldronaldronaldronaldronaldronaldronald@gmail.com",
     created_at: "Feb, 5, 2021",
     url: "https://randomuser.me/api/portraits/women/90.jpg"
   },

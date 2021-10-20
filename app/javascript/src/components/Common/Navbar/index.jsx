@@ -7,7 +7,7 @@ import { NAV_LINKS } from "./constants";
 
 const NavBar = () => (
   <Sidebar
-    isCollapsed
+    isCollapsed={false}
     navLinks={NAV_LINKS}
     profileInfo={{
       name: "Kieran Miller",

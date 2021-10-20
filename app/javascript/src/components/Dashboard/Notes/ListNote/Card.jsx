@@ -10,9 +10,9 @@ const Card = ({
   tag,
   notesStatus,
   created_at,
-  handleDeleteNote
+  handleSelectNote
 }) => (
-  <div className="p-4 my-4 rounded-sm neeto-ui-border-gray-300 neeto-ui-shadow-s">
+  <div className="p-4 my-4 border rounded neeto-ui-border-gray-300 neeto-ui-shadow-xs">
     <div className="flex justify-between">
       <Typography style="h4">{title}</Typography>
       <div>
@@ -22,8 +22,8 @@ const Card = ({
           position="bottom-end"
           icon={() => <MenuVertical size={18} />}
         >
-          <li>Edit</li>
-          <li onClick={() => handleDeleteNote(id)}>Delete</li>
+          <li onClick={() => handleSelectNote(id, "edit")}>Edit</li>
+          <li onClick={() => handleSelectNote(id, "delete")}>Delete</li>
         </Dropdown>
       </div>
     </div>
@@ -31,7 +31,7 @@ const Card = ({
       {description}
     </Typography>
     <hr className="my-3 neeto-ui-border-gray-300" />
-    <div className="flex items-center justify-between">
+    <div className="flex flex-row items-center justify-between">
       <div>
         <Tag
           label={tag}
@@ -39,13 +39,13 @@ const Card = ({
           className="neeto-ui-text-gray-500 neeto-ui-bg-gray-100"
         />
       </div>
-      <div className="flex items-center justify-between">
-        <Clock size={12} className="mr-2" />
+      <div className="flex flex-row items-center justify-between">
+        <Clock size={11} className="mr-1 neeto-ui-text-gray-600" />
         <Tooltip content="Wednesday, 10:30AM" placement="bottom">
           <div>
             <Typography
-              className="neeto-ui-text-gray-600"
-              style="body2"
+              className="font-normal neeto-ui-text-gray-600"
+              style="body3"
               weight="light"
             >{`${notesStatus} ${created_at}`}</Typography>
           </div>

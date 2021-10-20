@@ -15,6 +15,7 @@ import DeleteAlert from "./DeleteAlert";
 const Contacts = () => {
   const [state, setState] = useState({
     contacts: CONTACTS,
+    isMenuOpen: true,
     isSearchCollapsed: true,
     showNewContactPane: false,
     selectedContactId: null,
@@ -59,7 +60,7 @@ const Contacts = () => {
   };
 
   const renderContactsMenubar = () => (
-    <MenuBar showMenu={true} title={"Contacts"}>
+    <MenuBar showMenu={state.isMenuOpen} title={"Contacts"}>
       <MenuBar.Block label="All" count={0} active />
       <MenuBar.Block label="Archive" count={0} />
       <MenuBar.Block label="Completed" count={0} />
@@ -118,7 +119,7 @@ const Contacts = () => {
   );
 
   const renderContactsSection = () => (
-    <div className="w-full px-5">
+    <div className="w-full px-6">
       <Header
         actionBlock={[
           <Input
@@ -140,7 +141,14 @@ const Contacts = () => {
             icon={() => <Plus size={18} className="ml-3" />}
           />
         ]}
-        menuBarToggle={() => <BurgerMenu />}
+        menuBarToggle={() => (
+          <BurgerMenu
+            onClick={setState(state => ({
+              ...state,
+              isMenuOpen: !state.isMenuOpen
+            }))}
+          />
+        )}
         title="All Contacts"
       />
       {state.contacts.length !== 0 ? (
