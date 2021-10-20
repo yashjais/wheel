@@ -1,10 +1,10 @@
 import React from "react";
 
-import CardNote from "./CardNote";
+import Card from "./Card";
 
 const ListNote = ({ notes, handleDeleteNote }) =>
   notes.map(note => (
-    <CardNote
+    <Card
       key={note.id}
       id={note.id}
       title={note.title}

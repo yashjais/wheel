@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 
-import EmptyNotesListImage from "images/EmptyNotesList";
-import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
+import { Search, Settings, Plus, BurgerMenu } from "neetoicons";
 
+import ListNote from "./ListNote";
+import CreateNote from "./CreateNote";
+import DeleteAlert from "./DeleteAlert";
 import EmptyState from "components/Common/EmptyState";
 
+import EmptyNotesListImage from "images/EmptyNotesList";
+
 import { NOTES } from "./constants";
-import DeleteAlert from "./DeleteAlert";
-import ListNote from "./ListNote";
-import NewNotePane from "./NewNotePane";
 
 const Notes = () => {
   // const [loading, setLoading] = useState(true);
@@ -163,7 +164,7 @@ const Notes = () => {
         />
       )}
       {showNewNotePane && (
-        <NewNotePane
+        <CreateNote
           showPane={showNewNotePane}
           handleAddNewNote={handleAddNewNote}
           onClose={onClose}

@@ -4,10 +4,10 @@ import { Button, Pane, Typography, Toastr } from "neetoui/v2";
 import { Check } from "neetoicons";
 import { Formik, Form } from "formik";
 
-import NewNoteForm from "./NewNoteForm";
-import { INITIAL_VALUES, VALIDATION_SCHEMA } from "./constants";
+import NewNote from "./NewNote";
+import { INITIAL_VALUES, VALIDATION_SCHEMA } from "../constants";
 
-export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
+const CreateNote = ({ showPane, onClose, handleAddNewNote }) => {
   const handleSubmit = async values => {
     try {
       handleAddNewNote(values);
@@ -31,7 +31,7 @@ export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
       >
         <Form>
           <Pane.Body>
-            <NewNoteForm />
+            <NewNote />
           </Pane.Body>
           <Pane.Footer className="flex space-x-2">
             <Button label="Save Changes" icon={Check} type="submit" />
@@ -41,4 +41,6 @@ export default function NewNotePane({ showPane, onClose, handleAddNewNote }) {
       </Formik>
     </Pane>
   );
-}
+};
+
+export default CreateNote;

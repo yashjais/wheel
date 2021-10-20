@@ -5,7 +5,7 @@ import { Typography, Input, Button } from "neetoui/v2";
 import { MenuBar, Header } from "neetoui/v2/layouts";
 
 import ContactsTable from "./ContactsTable";
-import ContactPane from "./ContactPane";
+import CreateContact from "./CreateContact";
 import DeleteAlert from "./DeleteAlert";
 import { CONTACTS } from "./constants";
 
@@ -152,7 +152,7 @@ const Contacts = () => {
       {renderContactsMenubar()}
       {renderContactsSection()}
       {state.showNewContactPane && (
-        <ContactPane
+        <CreateContact
           showPane={state.showNewContactPane}
           onClose={onClose}
           handleAddNewContact={handleAddNewContact}
